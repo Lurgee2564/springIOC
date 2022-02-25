@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--使用spring创建对象
+
+    spring在配置文件加载时，就将所有bean标签内的对象初始化创建完毕了
+    在程序内使用getbean时调用的其实是同一个对象
+    1）使用spring创建构造函数无参对象
+    xml文件中使用bean标签创建
+
+    2）使用spring创建构造函数中有参数的对象
+    使用bean标签内的constructor-arg index标签通过下标赋值
+
+    使用bean标签内的constructor-arg type标签通过参数类型赋值（不建议使用，两个参数类型相同时会有冲突）
+
+    使用bean标签内的constructor-arg name标签通过参数名赋值（推荐）
+    -->
+
+    <bean id="hello" class="demo.jianjun.first.Hello">
+        <!--bean的配置
+        id:bean的唯一标识符，即对象名
+        class：需要创建的对象的全限定名
+        name：相当于对象的别名（alias）但是name更高级，可以同时取多个别名
+        property:设置对象的属性值
+        若不设置property属性值为null
+        ref:设置引用spring中已经创建的对象
+        value：普通属性设置
+        -->
+        <property name="str" value="我爱spring">
+
+        </property>
+    </bean>
+    <!--alias 别名
+    通过别名我们可以为bean标签内的对象设置不同的名字，在getbean方法中原名和别名可以随意调用
+    -->
+    <alias name="hello" alias="hahahh"/>
+
+    <!--import
+    一般用于团队开发，它可以将多个配置文件导入到一个配置文件之中
+    当开发中有多个开发者时，使用import可以将大家的配置文件集合到一个总的配置文件中，当我们在程序中使用的时候就可以只调用总的配置文件即可
+    -->
+</beans>

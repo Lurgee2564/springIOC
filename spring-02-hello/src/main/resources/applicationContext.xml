@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<import resource="beans.xml"/>
+    <!--import
+    当开发中有多个开发者时，使用import可以将大家的配置文件集合到一个总的配置文件中，当我们在程序中使用的时候就可以只调用总的配置文件即可
+
+    -->
+</beans>

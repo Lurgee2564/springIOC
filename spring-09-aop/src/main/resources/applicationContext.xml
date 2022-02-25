@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+         http://www.springframework.org/schema/aop/spring-aop.xsd">
+<!--    方法一：spring原生api支持-->
+<!--    &lt;!&ndash;注册bean-->
+    <bean id="userService" class="com.aop.demo.UserService"/>
+<!--    <bean id="log" class="com.aop.demo.log.Log"/>-->
+<!--    <bean id="afterLog" class="com.aop.demo.log.AfterLog"/>-->
+    <!--配置AOP(导入aop约束)-->
+<!--    <aop:config>-->
+<!--        <aop:pointcut id="pointcut" expression="execution(* com.aop.demo.UserService.*(..))"/>-->
+<!--        <aop:advisor advice-ref="log" pointcut-ref="pointcut"/>-->
+<!--        <aop:advisor advice-ref="afterLog" pointcut-ref="pointcut"/>-->
+<!--    </aop:config>&ndash;&gt;-->
+<!--方法二：自定义类
+    在aop配置中不使用spring的接口来调用前后通知的方法
+    我们在一个自定义类中编写好需要通知的方法，将该类定义为aop的切面，在before和after通知中设置我们需要执行的通知方法和执行目标即可
+
+-->
+<!--    <bean id="diy" class="com.aop.demo2.diy"/>-->
+<!--    <aop:config>-->
+<!--    &lt;!&ndash;自定义切面&ndash;&gt;-->
+<!--        <aop:aspect ref="diy">-->
+<!--    &lt;!&ndash;切入点&ndash;&gt;-->
+<!--            <aop:pointcut id="point" expression="execution(* com.aop.demo.UserService.*(..))"/>-->
+<!--    &lt;!&ndash;通知&ndash;&gt;-->
+<!--            <aop:before method="before" pointcut-ref="point"/>-->
+<!--            <aop:after method="after" pointcut-ref="point"/>-->
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
+<!--方式三：使用注解实现AOP
+我们在自定类中使用@Aspect注解类为切面
+在注解切点的方法时要在括号中指定切点的绝对
+使用@Before注解方法为切点前
+使用@After注解方法为切点之后
+使用@Around注解方法为环绕切点
+-->
+    <bean id="annotation" class="com.aop.demo3.annotation"/>
+    <aop:aspectj-autoproxy/>
+<!-- 开启注解支持-->
+
+</beans>
