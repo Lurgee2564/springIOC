@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+<!--引入外部配置文件-->
+
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+<!--别名优化-->
+    <typeAliases>
+        <package name="demo.pojo"/>
+    </typeAliases>
+
+<!--如果在spring中的mapper中配置了文件地址，则不需要再次注册-->
+<!--    <mappers>-->
+<!--        <mapper class="demo.dao.UserMapper"/>-->
+<!--    </mappers>-->
+
+
+
+
+</configuration>

@@ -11,6 +11,7 @@
         <module name="spring-01-ioc" />
         <module name="spring-02-hello" />
         <module name="spring-03-DI" />
+        <module name="spring-10" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

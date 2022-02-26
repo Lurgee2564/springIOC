@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/aop
+         http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+         http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+<!-- datasorce使用spring的数据源替换mybatis的配置-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/mybatis?useUnicode=true&amp;characterEncoding=UTF-8"/>
+        <property name="username" value="root"/>
+        <property name="password" value="20010621Rjj"/>
+    </bean>
+<!--  使用spring创建sqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+<!--这里设置需要注册的mapper.xml文件，如果在mybatis的配置文件中注册了，那么下面这行可以省略-->
+        <property name="mapperLocations" value="classpath:demo/dao/*.xml"/>
+    </bean>
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
+    </bean>
+<!--配置开启声明式事务-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+<!--配置事务通知-->
+    <tx:advice id="txAdvice">
+<!--对需要事务的方法进行配置 -->
+    <tx:attributes>
+        <tx:method name="add"/>
+        <tx:method name="delete"/>
+        <tx:method name="update"/>
+        <tx:method name="query"/>
+        <tx:method name="*"/>
+    </tx:attributes>
+    </tx:advice>
+
+<!-- 配置事务切入-->
+<aop:config>
+    <aop:pointcut id="txPointCut" expression="execution(* demo.dao.*.*(..))"/>
+    <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCut"/>
+</aop:config>
+
+
+</beans>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demo.dao.UserMapper">
+
+    <select id="getUser" resultType="user">
+        select * from mybatis.mybatis_user
+    </select>
+
+    <insert id="addUser" parameterType="user">
+        insert into mybatis.mybatis_user(id, user_Name, user_Acount, user_PSW) VALUES (#{id},#{user_Name},#{user_Acount},#{user_PSW});
+    </insert>
+
+    <delete id="deleteUser">
+        delete from mybatis.mybatis_user where id = #{id};
+    </delete>
+
+</mapper>
